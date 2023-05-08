@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Decision Trees, Reinforcement Learning, and Bayesian Models</title>
+</head>
+<body>
+  <h1>Decision Trees, Reinforcement Learning, and Bayesian Models</h1>
+  <h2>Decision Trees</h2>
+  <p id="decision-tree-result"></p>
+  <script>
+    function runDecisionTree() {
+      // Load the decision tree model.
+      var decisionTree = new DecisionTree(data);
+
+      // Make a prediction.
+      var prediction = decisionTree.predict(datum);
+
+      // Display the prediction.
+      $("#decision-tree-result").text(prediction);
+    }
+  </script>
+  <button onclick="runDecisionTree()">Run Decision Tree</button>
+  <h2>Reinforcement Learning</h2>
+  <p id="reinforcement-learning-result"></p>
+  <script>
+    function runReinforcementLearning() {
+      // Load the reinforcement learning model.
+      var reinforcementLearning = new ReinforcementLearning(env, num_episodes, gamma);
+
+      // Train the model.
+      reinforcementLearning.train();
+
+      // Make a prediction.
+      var prediction = reinforcementLearning.predict(state);
+
+      // Display the prediction.
+      $("#reinforcement-learning-result").text(prediction);
+    }
+  </script>
+  <button onclick="runReinforcementLearning()">Run Reinforcement Learning</button>
+  <h2>Bayesian Models</h2>
+  <p id="bayesian-model-result"></p>
+  <script>
+    function runBayesianModel() {
+      // Load the Bayesian model.
+      var bayesianModel = new Bayesian(data);
+
+      // Make a prediction.
+      var prediction = bayesianModel.predict(datum);
+
+      // Display the prediction.
+      $("#bayesian-model-result").text(prediction);
+    }
+  </script>
+  <button onclick="runBayesianModel()">Run Bayesian Model</button>
+  <script>
+    function runBayesianModel(data) {
+      // Load the Bayesian model.
+      var bayesianModel = new Bayesian(data);
+    
+      // Make a prediction.
+      var prediction = bayesianModel.predict(datum);
+    
+      // Display the prediction.
+      $("#bayesian-model-result").text(prediction);
+    }
+    </script>
+  <script src="decisionTree.js"></script>
+  <script src="reinforcementLearning.js"></script>
+  <script src="bayesian.js"></script>
+</body>
+</html>

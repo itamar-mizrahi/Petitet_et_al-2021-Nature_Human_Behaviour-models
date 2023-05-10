@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Scatter Plot</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <style>
+      .dot {
+        fill: steelblue;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>The Computational Cost of Active Information Sampling Before Decision-Making Under Uncertainty</h1>
+    <svg width="800" height="500"></svg>
+
+    <script>
+      // Load the data
+      d3.json("data.json", function(data) {
+          console.log(data);
+        // Create the scales
+        let xScale = d3.scaleLinear()
+          .domain([0, d3.max(data, function(d) { return d.time; })])
+          .range([50, 750]);
+
+        let yScale = d3.scaleLinear()
+          .domain([0, d3.max(data, function(d) { return d.cost; })])
+          .range([450, 50]);
+
+        // Create the dots
+        let svg = d3.select("svg");
+        svg.selectAll(".dot")
+          .data(data)
+          .enter().append("circle")
+            .attr("class", "dot")
+            .attr("cx", function(d) { return xScale(d.time); })
+            .attr("cy", function(d) { return yScale(d.cost); })
+            .attr("r", 5)
+            .on("mouseover", function(d) {
+              d3.select(this).attr("r", 8);
+              svg.append("text")
+                .attr("class", "tooltip")
+                .attr("x", xScale(d.time) + 10)
+                .attr("y", yScale(d.cost) - 10)
+                .text(d.method);
+            })
+            .on("mouseout", function(d) {
+              d3.select(this).attr("r", 5);
+              svg.select(".tooltip").remove();
+            });
+
+        // Add the axes
+        svg.append("g")
+          .attr("transform", "translate(0, 450)")
+          .call(d3.axisBottom(xScale).tickFormat(function(d) { return d + " ms"; }));
+
+        svg.append("g")
+          .attr("transform", "translate(50, 0)")
+          .call(d3.axisLeft(yScale).tickFormat(function(d) { return "$" + d;
+        }));
+
+// Add the labels
+svg.append("text")
+  .attr("text-anchor", "middle")
+  .attr("transform", "translate(400, 490)")
+  .text("Time to Decide (ms)");
+
+svg.append("text")
+  .attr("text-anchor", "middle")
+  .attr("transform", "rotate(-90)")
+  .attr("y", 25)
+  .attr("x", -250)
+  .text("Sampling Cost ($)");
+
+});
+</script>
+</body>
+</html>
